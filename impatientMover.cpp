@@ -1,7 +1,7 @@
 //====================================================================================================================//
 //=11/09/2018                                                          COT 4400.001 Analysis of Algorithms - Group 14=//
 //=impatientMover.cpp                                                            Alexander Alava Chonchol - U35432961=//
-//=                                                                                     Cristopher Khalil - U91696367=//
+//=                                                                                    Christopher Khalil - U91696367=//
 //=                                                                                            Tom Nguyen - U63542702=//
 //=                                                                                                                  =//
 //=                 This file contains the recursive dynamic solution to the impatient mover problem                 =//
