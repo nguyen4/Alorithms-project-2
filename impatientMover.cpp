@@ -1,5 +1,20 @@
+//====================================================================================================================//
+//=11/09/2018                                                          COT 4400.001 Analysis of Algorithms - Group 14=//
+//=impatientMover.cpp                                                            Alexander Alava Chonchol - U35432961=//
+//=                                                                                     Cristopher Khalil - U91696367=//
+//=                                                                                            Tom Nguyen - U63542702=//
+//=                                                                                                                  =//
+//=                 This file contains the recursive dynamic solution to the impatient mover problem                 =//
+//====================================================================================================================//
+
+#include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <array>
+#include <string>
+#include <string.h>
+#include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -77,14 +92,79 @@ int impatientMover(int boxes[], int arraySize, int index, int count[])
   return count[index];
 }
 
+// Declaring and defining wrapper function for our recursive dynamic solution //
+int impatientMoverWrapper(int boxes[], int arraySize)
+{
+  // Declaring our memoization data structure and initializing it with the sentinel value (0) //
+  int count[arraySize];
+  fill_n(count, arraySize, 0);
+
+  // Calling the recursive function //
+  impatientMover(boxes, arraySize, 0, count);
+
+  // Returning the maximum element in the array box counts //
+  return *max_element(count, count + arraySize);
+}
+
 
 // Declaring and defining main function //
 int main()
 {
-  int arr1[20] = {38,35,45,39,23,16,26,28,20,5,8,17,12,10,13,42,6,34,33,37};
-  int arr2[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  // Declaring and initialazing integer variables //
+  int problemCount = 0;
+  int problemSize = 0;
 
-  cout << impatientMover(arr1, 20, 0, arr2);
+  // Declaring string variables //
+  string newLine;
+  string list;
+
+  // Declaring input/output stream variables //
+  ifstream inputFile;
+  ofstream outputFile;
+
+  // Opening input file and assigning it to the input stream variable //
+  inputFile.open("input5.txt");
+
+  // Opening input file and assigning it to the output stream variable //
+  outputFile.open("output.txt");
+
+  // Reading in the number of problems to be solved from the text file and converting it into an integer //
+  getline(inputFile, newLine);
+  problemCount = stoi(newLine);
+
+  // Running through all problems to be solved //
+  for (int i = 0; i < problemCount; i++)
+  {
+    // Reading in the size of the current problem to be solved and converting it into an integer //
+    getline(inputFile, newLine);
+    problemSize = stoi(newLine);
+
+    // Declaring an array of size equal to the size of the current problem to be solved //
+    int numberList[problemSize];
+
+    // Reading in the values of the problem to be solved and converting it into an iss object //
+    getline(inputFile, newLine);
+    istringstream iss (newLine);
+
+    // Running through all the values in the problem //
+    for (int j = 0; j < problemSize; j++)
+    {
+      // Converting the values in the iss object into integers //
+      int number;
+      iss >> number;
+
+      // Storing integers into their respective indexes in the array //
+      numberList[j] = number;
+    }
+
+  // Writing result of the current problem into the output file //
+  outputFile << impatientMoverWrapper(numberList, problemSize) << "\n";
+
+  }
+
+  // Closing input and output files //
+  inputFile.close();
+  outputFile.close();
 
   return 0;
 }
