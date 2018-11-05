@@ -123,7 +123,7 @@ int main()
   ofstream outputFile;
 
   // Opening input file and assigning it to the input stream variable //
-  inputFile.open("input5.txt");
+  inputFile.open("input.txt");
 
   // Opening input file and assigning it to the output stream variable //
   outputFile.open("output.txt");
